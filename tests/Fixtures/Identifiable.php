@@ -4,48 +4,65 @@ namespace Gloudemans\Tests\Shoppingcart\Fixtures;
 
 use Gloudemans\Shoppingcart\Contracts\InstanceIdentifier;
 
-class Identifiable implements InstanceIdentifier
-{
-    /**
-     * @var int|string
-     */
-    private $identifier;
+class Identifiable implements InstanceIdentifier {
+	/**
+	 * @var int|string
+	 */
+	private $identifier;
 
-    /**
-     * @var int
-     */
-    private $discountRate;
+	/**
+	 * @var string
+	 */
+	private $discountType;
 
-    /**
-     * BuyableProduct constructor.
-     *
-     * @param int|string $id
-     * @param string     $name
-     * @param float      $price
-     */
-    public function __construct($identifier = 'identifier', $discountRate = 0)
-    {
-        $this->identifier = $identifier;
-        $this->discountRate = $discountRate;
-    }
+	/**
+	 * @var int
+	 */
+	private $discountRate;
 
-    /**
-     * Get the unique identifier to load the Cart from.
-     *
-     * @return int|string
-     */
-    public function getInstanceIdentifier($options = null)
-    {
-        return $this->identifier;
-    }
+	/**
+	 * BuyableProduct constructor.
+	 *
+	 * @param string $identifier
+	 * @param string $discountType
+	 * @param int $discountRate
+	 */
+	public function __construct( $identifier = 'identifier', $discountType = 'percent', $discountRate = 0 ) {
+		$this->identifier   = $identifier;
+		$this->discountType = $discountType;
+		$this->discountRate = $discountRate;
+	}
 
-    /**
-     * Get the unique identifier to load the Cart from.
-     *
-     * @return int|string
-     */
-    public function getInstanceGlobalDiscount($options = null)
-    {
-        return $this->discountRate;
-    }
+	/**
+	 * Get the unique identifier to load the Cart from.
+	 *
+	 * @param null $options
+	 *
+	 * @return int|string
+	 */
+	public function getInstanceIdentifier( $options = null ) {
+		return $this->identifier;
+	}
+
+	/**
+	 *
+	 *
+	 * @param null $options
+	 *
+	 * @return string
+	 */
+	public function getInstanceGlobalDiscountType( $options = null ) {
+		return $this->discountType;
+	}
+
+	/**
+	 * Get the unique identifier to load the Cart from.
+	 *
+	 * @param null $options
+	 *
+	 * @return int|string
+	 */
+	public function getInstanceGlobalDiscount( $options = null ) {
+		return $this->discountRate;
+	}
 }
